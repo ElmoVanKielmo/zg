@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import argparse
 import itertools
 import re
 
@@ -20,4 +21,14 @@ def find_shortest_distance(a, b, file_path):
 
 
 if __name__ == '__main__':
-    print(find_shortest_distance('motivation', 'development', 'sample.txt'))
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        '-f', dest='file_path', default='sample.txt',
+        help='Path to text file to be analyzed'
+    )
+    parser.add_argument(
+        dest='words', metavar='word', type=str, nargs=2,
+        help='Words to find distance between'
+    )
+    options = parser.parse_args()
+    print(find_shortest_distance(*options.words, options.file_path))
